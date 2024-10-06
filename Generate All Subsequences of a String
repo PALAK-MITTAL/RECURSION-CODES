@@ -1,0 +1,19 @@
+#include <iostream>
+using namespace std;
+
+void generateSubsequences(string str, string output, int index) {
+    if (index == str.length()) {
+        cout << output << endl;
+        return;
+    }
+    generateSubsequences(str, output, index + 1);
+    generateSubsequences(str, output + str[index], index + 1);
+}
+
+int main() {
+    string str;
+    cout << "Enter a string: ";
+    cin >> str;
+    generateSubsequences(str, "", 0);
+    return 0;
+}
