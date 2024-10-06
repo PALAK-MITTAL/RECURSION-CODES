@@ -1,0 +1,22 @@
+#include <iostream>
+using namespace std;
+
+int countOccurrences(int arr[], int n, int x) {
+    if (n == 0)
+        return 0;
+    return (arr[n - 1] == x) + countOccurrences(arr, n - 1, x);
+}
+
+int main() {
+    int n, x;
+    cout << "Enter number of elements: ";
+    cin >> n;
+    int arr[n];
+    cout << "Enter the elements: ";
+    for (int i = 0; i < n; i++)
+        cin >> arr[i];
+    cout << "Enter the element to count: ";
+    cin >> x;
+    cout << x << " occurs " << countOccurrences(arr, n, x) << " times." << endl;
+    return 0;
+}
