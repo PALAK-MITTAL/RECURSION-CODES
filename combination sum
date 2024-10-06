@@ -1,0 +1,34 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+void findCombinationSum(vector<int> &arr, int target, vector<int> &current, int index) {
+    if (target == 0) {
+        for (int num : current)
+            cout << num << " ";
+        cout << endl;
+        return;
+    }
+    if (index == arr.size() || target < 0)
+        return;
+
+    current.push_back(arr[index]);
+    findCombinationSum(arr, target - arr[index], current, index); // Include current element
+    current.pop_back();
+    findCombinationSum(arr, target, current, index + 1); // Exclude current element
+}
+
+int main() {
+    int n, target;
+    cout << "Enter the number of elements: ";
+    cin >> n;
+    vector<int> arr(n);
+    cout << "Enter the elements: ";
+    for (int i = 0; i < n; i++)
+        cin >> arr[i];
+    cout << "Enter target sum: ";
+    cin >> target;
+    vector<int> current;
+    findCombinationSum(arr, target, current, 0);
+    return 0;
+}
