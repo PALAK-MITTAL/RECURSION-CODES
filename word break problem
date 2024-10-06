@@ -1,0 +1,25 @@
+#include <iostream>
+#include <unordered_set>
+using namespace std;
+
+bool wordBreak(string s, unordered_set<string> &dict) {
+    if (s.empty())
+        return true;
+    for (int i = 1; i <= s.size(); i++) {
+        if (dict.find(s.substr(0, i)) != dict.end() && wordBreak(s.substr(i), dict))
+            return true;
+    }
+    return false;
+}
+
+int main() {
+    unordered_set<string> dict = {"i", "like", "sam", "sung", "samsung", "mobile", "ice", "cream", "icecream", "man", "go"};
+    string s;
+    cout << "Enter the string: ";
+    cin >> s;
+    if (wordBreak(s, dict))
+        cout << "Word can be segmented." << endl;
+    else
+        cout << "Word cannot be segmented." << endl;
+    return 0;
+}
