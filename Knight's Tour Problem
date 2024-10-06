@@ -1,0 +1,64 @@
+#include <iostream>
+using namespace std;
+
+// Function to print the chessboard
+void printSolution(int board[8][8]) {
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++)
+            cout << board[i][j] << "\t";
+        cout << endl;
+    }
+}
+
+// Function to check if a position is valid
+bool isSafe(int x, int y, int board[8][8]) {
+    return (x >= 0 && x < 8 && y >= 0 && y < 8 && board[x][y] == -1);
+}
+
+// Function to solve Knight's Tour Problem
+bool solveKTUtil(int board[8][8], int currMove, int x, int y, int xMove[], int yMove[]) {
+    if (currMove == 64) // If all squares are visited
+        return true;
+
+    // Try all next moves from the current coordinate x, y
+    for (int i = 0; i < 8; i++) {
+        int nextX = x + xMove[i];
+        int nextY = y + yMove[i];
+        if (isSafe(nextX, nextY, board)) {
+            board[nextX][nextY] = currMove; // Mark next move
+            if (solveKTUtil(board, currMove + 1, nextX, nextY, xMove, yMove))
+                return true; // Recur for the next move
+            else
+                board[nextX][nextY] = -1; // Backtrack
+        }
+    }
+    return false; // No move was successful
+}
+
+// Function to solve Knight's Tour
+void solveKT() {
+    int board[8][8];
+
+    // Initialize the chessboard
+    for (int i = 0; i < 8; i++)
+        for (int j = 0; j < 8; j++)
+            board[i][j] = -1;
+
+    // Move patterns for the knight
+    int xMove[8] = { 2, 1, -1, -2, -2, -1, 1, 2 };
+    int yMove[8] = { 1, 2, 2, 1, -1, -2, -2, -1 };
+
+    // Starting position
+    board[0][0] = 0; // Starting from the first square
+
+    // Solve the Knight's Tour problem
+    if (solveKTUtil(board, 1, 0, 0, xMove, yMove))
+        printSolution(board);
+    else
+        cout << "Solution does not exist." << endl;
+}
+
+int main() {
+    solveKT(); // Run the Knight's Tour solution
+    return 0;
+}
