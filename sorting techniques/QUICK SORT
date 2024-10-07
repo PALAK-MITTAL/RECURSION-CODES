@@ -1,0 +1,45 @@
+ public:
+    
+   // Function to swap two numbers
+   void swap(int &a, int &b) {
+    int temp = a;
+    a = b;
+    b = temp;
+   }
+    
+    //Function to sort an array using quick sort algorithm.
+    void quickSort(int a[], int low, int high)
+    {
+        // code here low is start while high is end index of array
+        
+        if(low>=high) return;
+        
+        int i=low-1;
+        int j=low;
+        int pivot=high;
+        
+        while(j<pivot){
+            
+            if(a[j]<a[pivot]){
+                i++;
+                swap(a[j],a[i]);
+            }
+            
+            j++;
+        }
+        
+        
+        i++;
+       swap(a[i],a[pivot]);
+    
+        quickSort(a,low,i-1);
+        quickSort(a,i+1,high);
+        
+    }
+    
+    public:
+    int partition (int arr[], int low, int high)
+    {
+       // Your code here
+       //won't use it
+    }
